@@ -1,11 +1,20 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { portfolioData } from "@/data/portfolio-data";
 
 export default function Hero() {
   const { personal } = portfolioData;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -52,57 +61,79 @@ export default function Hero() {
               variants={itemVariants}
               className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6"
             >
-              {/* Animated First Name */}
-              <span className="text-white inline-block">
-                {personal.name.split(" ")[0].split("").map((letter, index) => (
-                  <motion.span
-                    key={index}
-                    className="inline-block cursor-default"
-                    style={{ willChange: "transform" }}
-                    initial={{ opacity: 0, y: 50, rotateX: -90 }}
-                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{
-                      duration: 0.5,
-                      delay: 0.5 + index * 0.1,
-                      type: "spring",
-                      stiffness: 100,
-                    }}
-                    whileHover={{ 
-                      y: -5,
-                      color: "#818cf8",
-                      textShadow: "0 0 20px rgba(129, 140, 248, 0.8)",
-                      transition: { duration: 0.2 } 
-                    }}
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </span>{" "}
-              {/* Animated Last Name with gradient */}
-              <span className="inline-block">
-                {personal.name.split(" ")[1].split("").map((letter, index) => (
-                  <motion.span
-                    key={index}
-                    className="inline-block cursor-default gradient-text"
-                    style={{ willChange: "transform" }}
-                    initial={{ opacity: 0, y: -50, scale: 0 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{
-                      duration: 0.4,
-                      delay: 1 + index * 0.08,
-                      type: "spring",
-                      stiffness: 150,
-                    }}
-                    whileHover={{ 
-                      y: -8,
-                      textShadow: "0 0 25px rgba(139, 92, 246, 0.8)",
-                      transition: { duration: 0.2 } 
-                    }}
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </span>
+              {/* Animated First Name - simplified on mobile */}
+              {isMobile ? (
+                <motion.span
+                  className="text-white inline-block"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                >
+                  {personal.name.split(" ")[0]}
+                </motion.span>
+              ) : (
+                <span className="text-white inline-block">
+                  {personal.name.split(" ")[0].split("").map((letter, index) => (
+                    <motion.span
+                      key={index}
+                      className="inline-block cursor-default"
+                      style={{ willChange: "transform" }}
+                      initial={{ opacity: 0, y: 50, rotateX: -90 }}
+                      animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                      transition={{
+                        duration: 0.5,
+                        delay: 0.5 + index * 0.1,
+                        type: "spring",
+                        stiffness: 100,
+                      }}
+                      whileHover={{ 
+                        y: -5,
+                        color: "#818cf8",
+                        textShadow: "0 0 20px rgba(129, 140, 248, 0.8)",
+                        transition: { duration: 0.2 } 
+                      }}
+                    >
+                      {letter}
+                    </motion.span>
+                  ))}
+                </span>
+              )}{" "}
+              {/* Animated Last Name with gradient - simplified on mobile */}
+              {isMobile ? (
+                <motion.span
+                  className="inline-block gradient-text"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                >
+                  {personal.name.split(" ")[1]}
+                </motion.span>
+              ) : (
+                <span className="inline-block">
+                  {personal.name.split(" ")[1].split("").map((letter, index) => (
+                    <motion.span
+                      key={index}
+                      className="inline-block cursor-default gradient-text"
+                      style={{ willChange: "transform" }}
+                      initial={{ opacity: 0, y: -50, scale: 0 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{
+                        duration: 0.4,
+                        delay: 1 + index * 0.08,
+                        type: "spring",
+                        stiffness: 150,
+                      }}
+                      whileHover={{ 
+                        y: -8,
+                        textShadow: "0 0 25px rgba(139, 92, 246, 0.8)",
+                        transition: { duration: 0.2 } 
+                      }}
+                    >
+                      {letter}
+                    </motion.span>
+                  ))}
+                </span>
+              )}
             </motion.h1>
 
             <motion.div variants={itemVariants} className="mb-6">

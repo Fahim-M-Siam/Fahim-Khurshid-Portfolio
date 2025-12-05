@@ -102,7 +102,7 @@ export default function About() {
             {/* Stats Cards */}
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-3 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6"
             >
               {stats.map((stat, index) => (
                 <motion.div
@@ -130,7 +130,7 @@ export default function About() {
 
                     <div className="relative z-10">
                       <motion.div 
-                        className="text-5xl md:text-6xl font-bold gradient-text mb-3"
+                        className="text-4xl sm:text-5xl md:text-6xl font-bold gradient-text mb-3"
                         initial={{ scale: 1 }}
                         whileHover={{ scale: 1.1 }}
                         transition={{ type: "spring", stiffness: 300 }}
