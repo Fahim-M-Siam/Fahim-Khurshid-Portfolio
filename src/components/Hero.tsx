@@ -329,8 +329,8 @@ export default function Hero() {
               {/* Image container with glassmorphism border */}
               <motion.div
                 className="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden glass-strong p-2"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                animate={isMobile ? {} : { y: [0, -10, 0] }}
+                transition={isMobile ? {} : { duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
                 <div className="w-full h-full rounded-full overflow-hidden relative">
                   <Image
@@ -343,16 +343,16 @@ export default function Hero() {
                 </div>
               </motion.div>
 
-              {/* Decorative elements */}
+              {/* Decorative elements - only animate on desktop */}
               <motion.div
                 className="absolute -top-4 -right-4 w-24 h-24 rounded-full glass"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 3, repeat: Infinity }}
+                animate={isMobile ? {} : { scale: [1, 1.1, 1] }}
+                transition={isMobile ? {} : { duration: 3, repeat: Infinity }}
               />
               <motion.div
                 className="absolute -bottom-4 -left-4 w-16 h-16 rounded-full bg-gradient-to-r from-primary to-secondary"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2.5, repeat: Infinity }}
+                animate={isMobile ? {} : { scale: [1, 1.2, 1] }}
+                transition={isMobile ? {} : { duration: 2.5, repeat: Infinity }}
               />
             </div>
           </motion.div>

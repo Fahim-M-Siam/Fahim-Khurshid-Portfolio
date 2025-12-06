@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { portfolioData } from "@/data/portfolio-data";
 
@@ -8,6 +8,14 @@ export default function Projects() {
   const { projects } = portfolioData;
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <section id="projects" className="py-20 relative overflow-hidden">
@@ -58,9 +66,9 @@ export default function Projects() {
                   {/* Animated icon */}
                   <motion.div 
                     className="text-6xl opacity-50 group-hover:opacity-80 transition-all duration-300"
-                    whileHover={{ rotate: [0, -10, 10, 0] }}
-                    animate={{ y: [0, -5, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    whileHover={isMobile ? {} : { rotate: [0, -10, 10, 0] }}
+                    animate={isMobile ? {} : { y: [0, -5, 0] }}
+                    transition={isMobile ? {} : { duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   >
                     {index === 0 ? "🌐" : index === 1 ? "📦" : "🍽️"}
                   </motion.div>

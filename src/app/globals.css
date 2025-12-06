@@ -183,11 +183,75 @@ body {
 
 /* Performance optimization for mobile */
 @media (max-width: 768px) {
+
+  /* Disable floating animations */
   .float {
     animation: none;
   }
 
+  /* Slow down background animations */
   .animated-bg {
     animation-duration: 30s;
+  }
+
+  /* Reduce backdrop-filter blur intensity on mobile for better performance */
+  .glass {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .glass-strong {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Disable shimmer animations on mobile */
+  .animate-\[shimmer_2s_linear_infinite\],
+  .animate-\[shimmer_3s_linear_infinite\] {
+    animation: none !important;
+  }
+
+  /* Disable ping animations on mobile */
+  .animate-ping {
+    animation: none !important;
+  }
+
+  /* Optimize scrolling performance */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Use hardware acceleration for smooth transforms */
+  section {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* Reduce blur on background decorations */
+  .blur-3xl {
+    filter: blur(40px);
+  }
+
+  /* Optimize transition performance */
+  .transition-all {
+    transition-property: opacity, transform;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+
+  /* Disable hover-triggered animations on touch devices */
+  .group:hover .group-hover\:translate-x-full,
+  .group:hover .group-hover\:opacity-100 {
+    transform: none !important;
+    opacity: 0 !important;
+  }
+
+  /* Simplify hover effects */
+  *:hover {
+    transform: none !important;
   }
 }
