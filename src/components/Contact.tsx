@@ -146,7 +146,7 @@ export default function Contact() {
                 className="group relative block"
                 whileHover={{ x: 10 }}
               >
-                <div className="relative flex items-center gap-5 glass rounded-2xl p-5 overflow-hidden transition-all duration-300 group-hover:shadow-xl group-hover:shadow-primary/20">
+                <div className="relative flex items-center gap-3 sm:gap-5 glass rounded-2xl p-4 sm:p-5 overflow-hidden transition-all duration-300 group-hover:shadow-xl group-hover:shadow-primary/20">
                   {/* Animated gradient border on hover */}
                   <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary via-secondary to-primary bg-[length:200%_100%] animate-[shimmer_2s_linear_infinite] p-[1px]">
@@ -157,12 +157,12 @@ export default function Contact() {
                   {/* Shine effect on hover */}
                   <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/5 to-transparent rounded-2xl pointer-events-none" />
 
-                  <div className="relative z-10 w-14 h-14 rounded-xl bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                  <div className="relative z-10 flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                     {info.icon}
                   </div>
-                  <div className="relative z-10">
+                  <div className="relative z-10 min-w-0 flex-1">
                     <p className="text-gray-400 text-sm group-hover:text-primary-light transition-colors">{info.label}</p>
-                    <p className="text-white font-medium text-lg group-hover:text-white transition-colors">{info.value}</p>
+                    <p className="text-white font-medium text-base sm:text-lg group-hover:text-white transition-colors truncate">{info.value}</p>
                   </div>
                   
                   {/* Arrow indicator */}
